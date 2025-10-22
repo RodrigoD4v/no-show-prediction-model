@@ -1,0 +1,17 @@
+name: no-show-prediction-model
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11.14
+  - pip
+  - typer
+  - loguru
+  - tqdm
+  - black
+  - flake8
+  - isort
+  - pytest
+  - pip:
+    - python-dotenv
+    - mkdocs
+    - -e .

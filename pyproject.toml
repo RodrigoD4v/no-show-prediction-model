@@ -1,0 +1,35 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "no_show_prediction_model"
+version = "0.0.1"
+description = "Projeto de ci\u00eancia de dados voltado \u00e0 predi\u00e7\u00e3o de faltas em consultas m\u00e9dicas, utilizando aprendizado de m\u00e1quina para identificar pacientes com maior probabilidade de n\u00e3o comparecimento. O objetivo \u00e9 apoiar decis\u00f5es que reduzam o n\u00famero de aus\u00eancias e melhorem a efici\u00eancia do atendimento em cl\u00ednicas e sistemas de sa\u00fade."
+authors = [
+  { name = "Rodrigo Belmiro" },
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License"
+]
+requires-python = "==3.11.14"
+
+[tool.black]
+line-length = 99
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+known_first_party = ["no_show_prediction_model"]
+force_sort_within_sections = true
+
+
