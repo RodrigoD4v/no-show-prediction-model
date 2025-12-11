@@ -60,7 +60,15 @@ def main(
     cols_remove = [
         "motivo_nao_comparecimento",
         "data_nascimento",
-        "cid"
+        "cid",
+        "temperatura_media_dia",
+        "chuva_media_dia",
+        "temperatura_maxima_dia",
+        "chuva_maxima_dia",
+        "dia_chuvoso_anterior",
+        "chuva_forte_dia_anterior",
+        "intensidade_chuva",
+        "intensidade_calor"
     ]
     df = df.drop(columns=[c for c in cols_remove if c in df.columns])
     logger.info("Colunas removidas.")
@@ -127,10 +135,13 @@ def main(
         logger.info(f"Registros removidos com gênero inválido: {removidos}")
 
     # ============================================================
-    # 8. Convertendo data da consulta
+    # 8. Convertendo data
     # ============================================================
     if "data_consulta" in df.columns:
         df["data_consulta"] = pd.to_datetime(df["data_consulta"], format='%d/%m/%Y', errors="coerce")
+    
+    if "data_primeira_consulta" in df.columns:
+        df['data_primeira_consulta'] = pd.to_datetime(df['data_primeira_consulta'], format='%d/%m/%Y', errors='coerce')
 
     # ============================================================
     # 9. Removendo duplicatas
