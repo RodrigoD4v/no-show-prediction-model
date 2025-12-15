@@ -32,7 +32,7 @@ def main(
         'no_show_reason': 'motivo_nao_comparecimento',
         'disability': 'deficiencia',
         'date_of_birth': 'data_nascimento',
-        'entry_service_date': 'data_entrada_servico',
+        'entry_service_date': 'data_primeira_consulta',
         'city': 'cidade',
         'icd': 'cid',
         'appointment_month': 'mes_consulta',
@@ -85,7 +85,6 @@ def main(
     # ============================================================
     imputar_desconhecido = [
         "cidade",
-        "data_entrada_servico",
         "especialidade"
     ]
 
@@ -134,23 +133,15 @@ def main(
         removidos = antes - len(df)
         logger.info(f"Registros removidos com gênero inválido: {removidos}")
 
-    # ============================================================
-    # 8. Convertendo data
-    # ============================================================
-    if "data_consulta" in df.columns:
-        df["data_consulta"] = pd.to_datetime(df["data_consulta"], format='%d/%m/%Y', errors="coerce")
-    
-    if "data_primeira_consulta" in df.columns:
-        df['data_primeira_consulta'] = pd.to_datetime(df['data_primeira_consulta'], format='%d/%m/%Y', errors='coerce')
 
     # ============================================================
-    # 9. Removendo duplicatas
+    # 8. Removendo duplicatas
     # ============================================================
     df = df.drop_duplicates()
     logger.info("Duplicatas removidas.")
 
     # ============================================================
-    # 10. Salvando dataset processado
+    # 9. Salvando dataset processado
     # ============================================================
     PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
     df.to_csv(output_path, index=False)
